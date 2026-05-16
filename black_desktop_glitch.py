@@ -41,8 +41,7 @@ def get_screen_size():
 
 def get_work_area():
     """
-    Returns the usable desktop RECT — full screen minus the taskbar.
-    This is the area our window actually covers.
+    Returns the usable desktop RECT, full screen minus taskbar.
     """
     rc = ctypes.wintypes.RECT()
     user32.SystemParametersInfoW(SPI_GETWORKAREA, 0, ctypes.byref(rc), 0)
@@ -104,7 +103,7 @@ def quit_clean(hwnd):
 
 def union_area(rects):
     """
-    Total area covered by a list of (l, t, r, b) rects — overlap-proof.
+    Total area covered by a list of (l, t, r, b) rects, overlap-proof.
     Uses coordinate-compression sweep line.
     """
     if not rects:
@@ -149,7 +148,7 @@ def main():
     total_pixels = ww * wh
 
     # Threshold: 99% coverage triggers auto-close
-    # Handles users who can't quite reach the very edges
+    # Handles users who can't reach the edges
     THRESHOLD = 0.99
 
     # pygame window sized to work area only
